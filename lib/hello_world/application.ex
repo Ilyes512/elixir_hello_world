@@ -13,7 +13,8 @@ defmodule HelloWorld.Application do
     ]}]
 
     dispatch = :cowboy_router.compile(routes)
+    port = Application.get_env(:hello_world, :port, 8080)
 
-    :cowboy.start_clear(:hello, [port: 8080], %{:env => %{:dispatch => dispatch}})
+    :cowboy.start_clear(:hello, [port: port], %{:env => %{:dispatch => dispatch}})
   end
 end
