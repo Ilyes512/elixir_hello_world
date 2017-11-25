@@ -1,21 +1,13 @@
-# HelloWorld
+# HelloWorld: A Elixir Demo application
 
-**TODO: Add description**
+This is a very simple demo [Elixir](http://elixir-lang.github.io/) application written purely to do the fallowing things:
 
-## Installation
+- Play around with Cowboy (Erlang HTTP server).
+- Create a release using [Distillery](https://github.com/bitwalker/distillery) (maybe in combination with Docker).
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `hello_world` to your list of dependencies in `mix.exs`:
+More expirements may fallow (the above list will be updated).
 
-```elixir
-def deps do
-  [
-    {:hello_world, "~> 0.1.0"}
-  ]
-end
-```
+# TODO
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/hello_world](https://hexdocs.pm/hello_world).
-
+[ ] Use a self-signed SSL sertificate so I can serve using HTTPS.
+[ ] Use Docker.
