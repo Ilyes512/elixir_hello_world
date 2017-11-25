@@ -9,5 +9,5 @@ More expirements may fallow (the above list will be updated).
 
 # TODO
 
-[ ] Use a self-signed SSL sertificate so I can serve using HTTPS.
-[ ] Use Docker.
+- [ ] Use a self-signed SSL sertificate so I can serve using HTTPS.
+- [ ] Use Docker.
