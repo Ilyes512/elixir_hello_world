@@ -11,3 +11,4 @@ More expirements may fallow (the above list will be updated).
 
 - [ ] Use a self-signed SSL sertificate so I can serve using HTTPS.
 - [ ] Use Docker.
+- [ ] Use [Conform](https://github.com/bitwalker/conform) for setting run-time configuration.
