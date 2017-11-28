@@ -13,7 +13,7 @@ More expirements may fallow (the above list will be updated).
 
 ```
 docker build --rm -t hello_world .
-docker run --rm -p 8080:8080 -t hello_world
+docker run --rm -d -p 8080:8080 -t hello_world
 ```
 
 # TODO
