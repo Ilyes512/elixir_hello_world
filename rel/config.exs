@@ -50,5 +50,7 @@ release :hello_world do
   set applications: [
     :runtime_tools
   ]
+
+  plugin Conform.ReleasePlugin
 end
 
