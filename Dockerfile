@@ -13,6 +13,7 @@ COPY mix.lock .
 #Install dependencies and build Release
 RUN export MIX_ENV=prod && \
     mix deps.get && \
+    mix conform.configure && \
     mix release
 
 #Extract Release archive to /rel for copying in next stage
@@ -27,8 +28,9 @@ RUN APP_NAME="hello_world" && \
 FROM pentacent/alpine-erlang-base:latest
 
 #Set environment variables and expose port
-EXPOSE 8080
+# EXPOSE 8080
 ENV REPLACE_OS_VARS=true
+# ENV APP_PORT=8080
 
 #Copy and extract .tar.gz Release file from the previous stage
 COPY --from=build /export/ .

@@ -24,5 +24,3 @@ hello_world-*.tar
 
 # Ignore the Elixir Language Server cache folder (VSCode ElixirLS Plugin)
 /.elixir_ls
-
-config/*.conf

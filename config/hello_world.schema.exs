@@ -58,7 +58,17 @@ See the moduledoc for `Conform.Schema.Validator` for more details and examples.
       default: 8080,
       doc: "Set the port on which you want to access the application.",
       hidden: false,
+      env_var: "APP_PORT",
       to: "hello_world.port"
+    ],
+    "hello_world.cookie": [
+      commented: false,
+      datatype: :binary,
+      # default: "test_cookie",
+      doc: "Set the erlang cookie here.",
+      hidden: false,
+      to: "hello_world.cookie",
+      env_var: "APP_COOKIE"
     ]
   ],
   transforms: [],
