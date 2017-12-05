@@ -2,7 +2,11 @@
 # and its dependencies with the aid of the Mix.Config module.
 use Mix.Config
 
-config :hello_world, port: 8080
+config :hello_world,
+  port: 8080,
+  tls: true,
+  certfile: Path.join([".", "cert", "hello_world.crt"]) |> Path.absname(),
+  keyfile: Path.join([".", "cert", "hello_world.key"]) |> Path.absname()
 
 # This configuration is loaded before any dependency and is restricted
 # to this project. If another project depends on this project, this
