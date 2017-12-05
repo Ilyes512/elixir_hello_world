@@ -31,14 +31,13 @@ environment :dev do
   set dev_mode: true
   set include_erts: false
   # set vm_args: "rel/vm.args"
-  set cookie: Application.get_env(:hello_world, :cookie)
-  #:placeholder_dev
+  set cookie: :hello_world_dev
 end
 
 environment :prod do
   set include_erts: true
   set include_src: false
-  set cookie: Application.get_env(:hello_world, :cookie)
+  set cookie: :prod_cookie_placeholder
 end
 
 # You may define one or more releases in this file.
@@ -51,7 +50,5 @@ release :hello_world do
   set applications: [
     :runtime_tools
   ]
-
-  plugin Conform.ReleasePlugin
 end
 
