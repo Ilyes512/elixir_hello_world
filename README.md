@@ -32,6 +32,8 @@ $ openssl req -newkey rsa:2048 -nodes -keyout hello_world.key -x509 -days 365 -o
 
 # TODO
 
-- [ ] Use a self-signed SSL sertificate so I can serve using HTTPS.
-- [ ] Use Docker.
-- [ ] Use [Conform](https://github.com/bitwalker/conform) for setting run-time configuration.
+- [x] Use a self-signed SSL sertificate so I can serve using HTTPS.
+- [x] Use Docker.
+- [ ] Create a docker-compose file.
+- [ ] Redirect http to https.
+- [ ] ~~Use [Conform](https://github.com/bitwalker/conform) for setting run-time configuration.~~ (Experimented with it, but at this time not needed.)
