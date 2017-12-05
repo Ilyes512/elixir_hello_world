@@ -13,7 +13,6 @@ COPY mix.lock .
 #Install dependencies and build Release
 RUN export MIX_ENV=prod && \
     mix deps.get && \
-    mix conform.configure && \
     mix release
 
 #Extract Release archive to /rel for copying in next stage
