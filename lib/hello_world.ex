@@ -1,18 +1,3 @@
 defmodule HelloWorld do
-  @moduledoc """
-  Documentation for HelloWorld.
-  """
-
-  @doc """
-  Hello world.
-
-  ## Examples
-
-      iex> HelloWorld.hello
-      :world
-
-  """
-  def hello do
-    :world
-  end
+  def start_cowboy(type \\ :normal, args \\ []), do: HelloWorld.Cowboy.start(type, args)
 end
