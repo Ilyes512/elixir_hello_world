@@ -5,5 +5,12 @@ defmodule HelloWorld.Application do
 
   use Application
 
-  def start(type, args), do: HelloWorld.Cowboy.start(type, args)
+  def start(_type, _args) do
+    children = [
+      Supervisor.child_spec({Task, fn -> HelloWorld.Cowboy.start() end}, restart: :transient)
+    ]
+
+    opts = [strategy: :one_for_one, name: HelloWorld.Supervisor]
+    Supervisor.start_link(children, opts)
+  end
 end

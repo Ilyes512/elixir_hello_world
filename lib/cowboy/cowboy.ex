@@ -1,5 +1,5 @@
 defmodule HelloWorld.Cowboy do
-  def start(_type, _args) do
+  def start() do
     routes = [
       {:_, [
         {"/hello/:name[/:...]", HelloWorld.Cowboy.Handler.Hello, []},
