@@ -11,6 +11,14 @@ defmodule HelloWorld.Cowboy do
     dispatch = :cowboy_router.compile(routes)
     port = Application.get_env(:hello_world, :port, 8080)
 
+    proto_opts = %{
+      :env => %{dispatch: dispatch},
+      :stream_handlers => [
+        :cowboy_stream_h,
+        Cowboy.StreamHandlers.RemoveServerSig
+      ]
+    }
+
     case Application.get_env(:hello_world, :tls) do
       true ->
         :cowboy.start_tls(
@@ -20,10 +28,11 @@ defmodule HelloWorld.Cowboy do
             certfile: Application.get_env(:hello_world, :certfile),
             keyfile: Application.get_env(:hello_world, :keyfile)
           ],
-          %{:env => %{:dispatch => dispatch}}
+          proto_opts
         )
+
       _ ->
-        :cowboy.start_clear(:hello, [port: port], %{:env => %{:dispatch => dispatch}})
+        :cowboy.start_clear(:hello, [port: port], proto_opts)
     end
   end
 end
