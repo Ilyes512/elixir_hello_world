@@ -1,38 +1,68 @@
 defmodule HelloWorld.Cowboy do
   def start() do
-    routes = [
+    case Application.get_env(:hello_world, :tls) do
+      true ->
+        start_tls()
+
+      _ ->
+        start_clear()
+    end
+  end
+
+  def start_clear() do
+    port = Application.get_env(:hello_world, :port_clear)
+    proto_opts = app_dispatch() |> proto_opts()
+
+    :cowboy.start_clear(:hello_clear, [port: port], proto_opts)
+  end
+
+  def start_tls() do
+    port = Application.get_env(:hello_world, :port_tls)
+    proto_opts = app_dispatch() |> proto_opts()
+
+    :cowboy.start_tls(
+      :hello_tls,
+      [
+        port: port,
+        certfile: Application.get_env(:hello_world, :certfile),
+        keyfile: Application.get_env(:hello_world, :keyfile)
+      ],
+      proto_opts
+    )
+  end
+
+  def start_redirect() do
+    port = Application.get_env(:hello_world, :port_clear)
+    proto_opts = redirect_dispatch() |> proto_opts()
+
+    :cowboy.start_clear(:hello_redirect, [port: port], proto_opts)
+  end
+
+  defp app_dispatch() do
+    [
       {:_, [
         {"/hello/:name[/:...]", HelloWorld.Cowboy.Handler.Hello, []},
         {"/hello", HelloWorld.Cowboy.Handler.HelloWorld, []},
         {:_, HelloWorld.Cowboy.Handler.Goodbye, []}
       ]}
     ]
+    |> :cowboy_router.compile()
+  end
 
-    dispatch = :cowboy_router.compile(routes)
-    port = Application.get_env(:hello_world, :port, 8080)
+  defp redirect_dispatch() do
+    port_tls = Application.get_env(:hello_world, :port_tls)
 
-    proto_opts = %{
+    [{:_, [{:_, HelloWorld.Cowboy.Handler.Redirect, port_tls}]}]
+    |> :cowboy_router.compile()
+  end
+
+  defp proto_opts(dispatch) do
+    %{
       :env => %{dispatch: dispatch},
       :stream_handlers => [
         :cowboy_stream_h,
         Cowboy.StreamHandlers.RemoveServerSig
       ]
     }
-
-    case Application.get_env(:hello_world, :tls) do
-      true ->
-        :cowboy.start_tls(
-          :hello,
-          [
-            port: port,
-            certfile: Application.get_env(:hello_world, :certfile),
-            keyfile: Application.get_env(:hello_world, :keyfile)
-          ],
-          proto_opts
-        )
-
-      _ ->
-        :cowboy.start_clear(:hello, [port: port], proto_opts)
-    end
   end
 end

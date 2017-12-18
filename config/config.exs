@@ -3,7 +3,8 @@
 use Mix.Config
 
 config :hello_world,
-  port: 8080,
+  port_tls: 8430,
+  port_clear: 8080,
   tls: false,
   certfile: Path.join([".", "cert", "hello_world.crt"]) |> Path.absname(),
   keyfile: Path.join([".", "cert", "hello_world.key"]) |> Path.absname()
