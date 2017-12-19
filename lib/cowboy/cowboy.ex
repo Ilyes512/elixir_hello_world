@@ -41,9 +41,9 @@ defmodule HelloWorld.Cowboy do
   defp app_dispatch() do
     [
       {:_, [
-        {"/hello/:name[/:...]", HelloWorld.Cowboy.Handler.Hello, []},
-        {"/hello", HelloWorld.Cowboy.Handler.HelloWorld, []},
-        {:_, HelloWorld.Cowboy.Handler.Goodbye, []}
+        {"/hello/:name[/:...]", HelloWorld.Cowboy.Handlers.Hello, []},
+        {"/hello", HelloWorld.Cowboy.Handlers.HelloWorld, []},
+        {:_, HelloWorld.Cowboy.Handlers.Goodbye, []}
       ]}
     ]
     |> :cowboy_router.compile()
@@ -52,7 +52,7 @@ defmodule HelloWorld.Cowboy do
   defp redirect_dispatch() do
     port_tls = Application.get_env(:hello_world, :port_tls)
 
-    [{:_, [{:_, HelloWorld.Cowboy.Handler.Redirect, port_tls}]}]
+    [{:_, [{:_, HelloWorld.Cowboy.Handlers.Redirect, port_tls}]}]
     |> :cowboy_router.compile()
   end
 

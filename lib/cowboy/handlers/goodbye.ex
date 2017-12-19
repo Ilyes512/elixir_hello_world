@@ -1,4 +1,4 @@
-defmodule HelloWorld.Cowboy.Handler.Goodbye do
+defmodule HelloWorld.Cowboy.Handlers.Goodbye do
   def init(req, state) do
     req =
       :cowboy_req.reply(
